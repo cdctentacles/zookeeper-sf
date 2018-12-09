@@ -13,7 +13,16 @@ namespace zookeeper_sf
         static int Main(string[] args)
         {
             // args should be NumberOfReplicas ServiceName
-            string [] expectedArgs = new string[] {"ServiceName", "NumberOfReplica", "MaxNumRetries", "WaitInMsPerRetry", "MyIP", "DataFolderPath"};
+            string [] expectedArgs = new string[] {
+                "ServiceName",
+                "NumberOfReplica",
+                "MaxNumRetries",
+                "WaitInMsPerRetry",
+                "MyIP",
+                "DataFolderPath",
+                "ConfFilePath"
+            };
+
             if (args.Length != expectedArgs.Length)
             {
                 Console.Error.WriteLine("Expected args : {0}", String.Join(',', expectedArgs));
@@ -26,12 +35,23 @@ namespace zookeeper_sf
             var waitInMsPerRetry = int.Parse(args[3]);
             var myIp = args[4];
             var dataFolderPath = args[5];
+            var confFilePath = args[6];
 
             var retVal = FindService.FindServiceIps(serviceName, numReplica, maxNumRetries, waitInMsPerRetry);
             if (retVal.HasValue())
             {
                 var endpoints = retVal.GetValue();
-                Console.WriteLine(String.Join(',', endpoints));
+                // write endpoints to confFile
+                Console.WriteLine("Endpoints : {0}", String.Join(',', endpoints));
+                using (var writer = File.AppendText(confFilePath))
+                {
+                    foreach (var endpoint in endpoints)
+                    {
+                        writer.WriteLine(endpoint);
+                    }
+                    writer.Flush();
+                }
+
                 // also adds a file `myid` to "data" folder
                 var myId = 1;
                 foreach (var endpoint in endpoints)
