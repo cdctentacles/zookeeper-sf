@@ -17,16 +17,15 @@ namespace zookeeper_sf
         public static void Initialize()
         {
             SFCodePath = Environment.GetEnvironmentVariable(FabricCodePathEnvironmentVariableName, EnvironmentVariableTarget.Process);
+            if (string.IsNullOrEmpty(SFCodePath))
+            {
+                throw new InvalidOperationException("Environment Variable: The path from where to resolve the Service Fabric binaries has not been set.");
+            }
         }
 
         private static Assembly LoadFromFabricCodePath(object sender, ResolveEventArgs args)
         {
             string assemblyName = new AssemblyName(args.Name).Name;
-
-            if (string.IsNullOrEmpty(SFCodePath))
-            {
-                throw new InvalidOperationException("The path from where to resolve the Service Fabric binaries has not been set; please try calling SFBinaryLoader.Initialize().");
-            }
 
             try
             {

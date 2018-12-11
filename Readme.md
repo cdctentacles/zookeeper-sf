@@ -1,3 +1,10 @@
+# Zookeeper Service Fabric App
+
+Build:
+```bash
+docker build . -f Dockerfile -t zookeeper-sf:dev
+```
+
 Todo :
 * Add dotnet to the Dockerfile
 * Build code using dockerimage and mount code in the image
