@@ -26,8 +26,10 @@ namespace zookeeper_sf
             if (args.Length != expectedArgs.Length)
             {
                 Console.Error.WriteLine("Expected args : {0}", String.Join(',', expectedArgs));
-                return -1;
+                return 1;
             }
+
+            Console.WriteLine($"Arguments: {String.Join(' ', expectedArgs)}");
 
             var serviceName = args[0];
             var numReplica = int.Parse(args[1]);
@@ -67,7 +69,7 @@ namespace zookeeper_sf
                 return 0;
             }
 
-            return -2;
+            return 2;
         }
     }
 }

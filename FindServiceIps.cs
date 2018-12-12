@@ -19,12 +19,17 @@ namespace zookeeper_sf
             {
                 retryCount += 1;
 
+                Console.WriteLine($"Attempt to find service ips : {retryCount}");
+
                 var cancellationSource = new CancellationTokenSource(waitInMsPerRetry);
                 var partitionFindTask = partitionResolver.ResolveAsync(new Uri(serviceName), ServicePartitionKey.Singleton, cancellationSource.Token);
 
                 try {
                     partitionFindTask.Wait();
-                } catch (Exception) {}
+                } catch (Exception ex)
+                {
+                    Console.WriteLine($"Exception from FindServiceIps task : {ex}");
+                }
 
                 if (partitionFindTask.IsCompletedSuccessfully)
                 {
@@ -54,6 +59,10 @@ namespace zookeeper_sf
                     {
                         return new ConditionalValue<string[]>(serverAddress);
                     }
+                }
+                else
+                {
+                    Console.WriteLine($"Task did not complete successfully. Sleep for {waitInMsPerRetry} msecs");
                 }
 
                 Thread.Sleep(waitInMsPerRetry);

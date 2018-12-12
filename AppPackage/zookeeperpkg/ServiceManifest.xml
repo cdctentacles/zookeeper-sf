@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ServiceManifest Name="zookeeperpkg"
-                 Version="0.0.1"
+                 Version="0.0.17"
                  xmlns="http://schemas.microsoft.com/2011/01/fabric"
                  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -8,14 +8,14 @@
   <ServiceTypes>
     <StatelessServiceType ServiceTypeName="zookeepertype" UseImplicitHost="true" />
   </ServiceTypes>
-  <CodePackage Name="Code" Version="0.0.1">
+  <CodePackage Name="Code" Version="0.0.17">
     <EntryPoint>
       <ContainerHost>
-        <ImageName>ashishnegi1/zookeeper-sf:0.0.1-alpine</ImageName>
+        <ImageName>ashishnegi1/zookeeper-sf:0.0.17</ImageName>
       </ContainerHost>
     </EntryPoint>
   </CodePackage>
-  <ConfigPackage Name="Config" Version="0.0.1" />
+  <ConfigPackage Name="Config" Version="0.0.17" />
   <Resources>
     <Endpoints>
 	    <Endpoint Protocol="tcp" Name="ClientEndpoint" Port="2181" />

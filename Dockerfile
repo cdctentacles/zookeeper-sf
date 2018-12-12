@@ -1,16 +1,16 @@
-FROM wurstmeister/zookeeper As base
+FROM microsoft/aspnetcore:2.0 As base
 
-RUN apt-get update && \
-    apt-get -qqy install \
-        libunwind8 \
-        libkrb5-3 \
-        libicu52 \
-        liblttng-ust0 \
-        libssl1.0.0 \
-        zlib1g \
-        libuuid1 && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+# RUN apt-get update && \
+#     apt-get -qqy install \
+#         libunwind8 \
+#         libkrb5-3 \
+#         libicu52 \
+#         liblttng-ust0 \
+#         libssl1.0.0 \
+#         zlib1g \
+#         libuuid1 && \
+#     apt-get clean && \
+#     rm -rf /var/lib/apt/lists/*
 
 WORKDIR /
 
@@ -29,4 +29,5 @@ WORKDIR /setup
 COPY --from=publish /setup .
 ADD start.sh /usr/bin/start.sh
 
+WORKDIR /app
 CMD /usr/sbin/sshd && bash /usr/bin/start.sh
