@@ -20,8 +20,12 @@ MaxNumRetries="${MaxNumRetries:-10}"
 WaitInMsPerRetry="${WaitInMsPerRetry:-5000}"
 MyIp=`hostname -I`
 
+pushd /setup
+
 # "ServiceName" "NumberOfReplica" "MaxNumRetries" "WaitInMsPerRetry" "MyIP" "DataFolderPath" "ConfFilePath"
-LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$FabricCodePath /setup/zookeeper-sf $ServiceName $NumberOfReplica $MaxNumRetries $WaitInMsPerRetry $MyIp /app /app/zoo.cfg
+LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$FabricCodePath dotnet zookeeper-sf.dll $ServiceName $NumberOfReplica $MaxNumRetries $WaitInMsPerRetry $MyIp /app /app/zoo.cfg
 # $ZK_HOME/data $ZK_HOME/conf/zoo.cfg
 check_errs $?
+popd
+
 /usr/bin/start-zk.sh

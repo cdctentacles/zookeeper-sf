@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ApplicationManifest ApplicationTypeName="zookeeper"
-                     ApplicationTypeVersion="0.0.17"
+                     ApplicationTypeVersion="0.0.19"
                      xmlns="http://schemas.microsoft.com/2011/01/fabric"
                      xmlns:xsd="http://www.w3.org/2001/XMLSchema"
                      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
@@ -9,7 +9,7 @@
     <Parameter Name="InstanceCount" DefaultValue="3" />
   </Parameters>
   <ServiceManifestImport>
-    <ServiceManifestRef ServiceManifestName="zookeeperpkg" ServiceManifestVersion="0.0.17" />
+    <ServiceManifestRef ServiceManifestName="zookeeperpkg" ServiceManifestVersion="0.0.19" />
     <ConfigOverrides />
     <Policies>
       <ContainerHostPolicies CodePackageRef="Code" ContainersRetentionCount="2">
