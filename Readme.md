@@ -3,7 +3,7 @@
 Deploy using:
 ```powershell
 Remove-ServiceFabricComposeDeployment -DeploymentName zookeeper -Force
-New-ServiceFabricComposeDeployment -DeploymentName zookeeper -Compose stack.yaml
+New-ServiceFabricComposeDeployment -DeploymentName zookeeper -Compose zookeeper.yaml
 ```
 
 Todo :
