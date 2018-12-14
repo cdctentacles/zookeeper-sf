@@ -1,15 +1,10 @@
 # Zookeeper Service Fabric App
 
-Build:
-```bash
-docker build . -f Dockerfile -t zookeeper-sf:dev
+Deploy using:
+```powershell
+Remove-ServiceFabricComposeDeployment -DeploymentName zookeeper -Force
+New-ServiceFabricComposeDeployment -DeploymentName zookeeper -Compose zookeeper.yaml
 ```
 
 Todo :
-* Add dotnet to the Dockerfile
-* Build code using dockerimage and mount code in the image
-* Start the zookeeper if tool returns success.
-
-Next iteration:
-* Create a separate service and lets ask from it : list of all ips and myid.
-    * We need separate service because during failover, if ip change, we will still be using same id.
+* Make sure that no instances of zookeeper are on same node.
